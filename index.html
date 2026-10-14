@@ -45,14 +45,20 @@
   }
 
   * { box-sizing: border-box; }
-  html, body { height: 100%; margin: 0; }
-  html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+  html, body { min-height: 100%; margin: 0; }
+  html {
+    scroll-padding-top: env(safe-area-inset-top, 0px);
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    overflow-x: hidden;
+  }
 
   body {
     font-family: 'Inter', sans-serif;
     background: radial-gradient(circle at 15% 10%, var(--lav-2), var(--lav) 65%);
     color: var(--ink);
     min-height: 100%;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -74,6 +80,7 @@
     z-index: 1;
     width: 100%;
     max-width: 440px;
+    margin: 0 auto;
   }
 
   .brand {
@@ -106,6 +113,8 @@
     text-align: center;
     box-shadow: 0 22px 54px -20px var(--shadow);
     position: relative;
+    width: 100%;
+    max-width: 100%;
   }
 
   /* Page 1: note card */
@@ -188,7 +197,9 @@
 
   .choice-row {
     display: flex;
+    flex-wrap: wrap;
     gap: 14px;
+    row-gap: 10px;
     justify-content: center;
     align-items: center;
     margin-top: 6px;
@@ -237,9 +248,11 @@
     display: flex;
     gap: 10px;
     overflow-x: auto;
+    overflow-y: hidden;
     padding: 6px 2px 14px;
     margin-bottom: 8px;
     scroll-snap-type: x proximity;
+    -webkit-overflow-scrolling: touch;
   }
   .date-strip::-webkit-scrollbar { height: 5px; }
   .date-strip::-webkit-scrollbar-thumb { background: var(--line); border-radius: 10px; }
@@ -372,13 +385,58 @@
     .btn-primary:hover { transform: none; }
   }
 
+  /* Tablets / larger phones */
+  @media (max-width: 480px) {
+    body { padding: max(20px, env(safe-area-inset-top, 0px)) 14px max(20px, env(safe-area-inset-bottom, 0px)); }
+    .card { padding: 32px 22px; }
+    h1 { font-size: clamp(27px, 7.8vw, 36px); }
+    p.lead { font-size: 15px; }
+    .note-text { font-size: 15px; }
+    button { padding: 13px 24px; font-size: 15px; }
+    .photo-frame { width: 150px; height: 150px; }
+    .quote-block { font-size: 21px; }
+    .date-pill { width: 52px; }
+    .ticket { padding: 22px 18px; }
+  }
+
+  /* Small / narrow phones */
   @media (max-width: 380px) {
-    .card { padding: 30px 18px; }
-    h1 { font-size: clamp(26px, 7.5vw, 34px); }
-    button { padding: 12px 20px; font-size: 14.5px; }
-    .choice-row { flex-wrap: wrap; row-gap: 10px; }
-    .photo-frame { width: 140px; height: 140px; }
-    .quote-block { font-size: 20px; }
+    .card { padding: 26px 16px; }
+    h1 { font-size: clamp(24px, 7.5vw, 32px); }
+    p.lead { font-size: 14.5px; }
+    .note-text { font-size: 14.5px; line-height: 1.7; }
+    button { padding: 12px 18px; font-size: 14px; }
+    .photo-frame { width: 130px; height: 130px; }
+    .quote-block { font-size: 19px; }
+    .brand { font-size: 13px; letter-spacing: 2px; }
+    .date-pill { width: 48px; }
+    .time-chip { padding: 7px 11px; font-size: 12px; }
+    .ticket { padding: 20px 14px; }
+    .ticket h2 { font-size: 26px; }
+  }
+
+  /* Very small phones */
+  @media (max-width: 330px) {
+    .card { padding: 22px 12px; }
+    h1 { font-size: clamp(22px, 7.5vw, 28px); }
+    button { padding: 11px 16px; font-size: 13.5px; }
+    .photo-frame { width: 112px; height: 112px; }
+  }
+
+  /* Short / landscape viewports: keep the full flow visible without forcing zoom */
+  @media (max-height: 600px) {
+    body { align-items: flex-start; }
+    .stage { margin: 12px auto; }
+    .card { padding: 22px 20px; }
+    .critter, .celebrate-mark { font-size: 32px; margin-bottom: 4px; }
+    .note-text { font-size: 14px; line-height: 1.55; margin: 10px 0 4px; }
+    .note-text p { margin: 0 0 12px; }
+    .note-divider { margin: 2px 0 12px; }
+    h1 { margin-bottom: 8px; }
+    p.lead { margin-bottom: 14px; }
+    .photo-frame { width: 110px; height: 110px; margin-bottom: 10px; }
+    .quote-block { margin: 2px 0 14px; }
+    .progress { margin-top: 12px; }
   }
 </style>
 </head>
@@ -398,9 +456,9 @@
         <hr class="note-divider">
         <p>Whenever you see him,<br>remember that your Tukky was thinking about you and wanted to make you smile.🤭.</p>
         <hr class="note-divider">
-        <p> --tukkyy <span class="em"></span>
+        <p> --tukkyy <span class="em"></span></p>
         <hr class="note-divider">
-        <p> (One selfie with your new little buddy, please!📸) <span class="em"></span>
+        <p> (One selfie with your new little buddy, please!📸) <span class="em"></span></p>
       </div>
       <button class="btn-primary btn-bottom-center" onclick="goTo(2)">let's fix our date</button>
       <div class="progress" data-total="5" data-current="1"></div>
@@ -644,5 +702,4 @@
 
 </body>
 </html>
-
 </body></html>
