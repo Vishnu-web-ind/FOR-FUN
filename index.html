@@ -521,7 +521,9 @@
         <h2>It's a date!</h2>
         <div class="when" id="ticketWhen">&mdash;</div>
         <div class="sub">From video calls to 😂❤️ &mdash; real-life awkwardness! </div>
+        <p class="fine-print">It's just for fun 😄 we'll choose the real date together 💕</p>
       </div>
+      <button class="btn-primary" style="margin-bottom:12px" onclick="tellTukky()">Tell Tukky 💌</button>
       <button class="btn-primary" onclick="goTo(1)">See you there</button>
       <div class="progress" data-total="5" data-current="5"></div>
     </div>
@@ -536,6 +538,16 @@
     document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
     document.getElementById('screen' + n).classList.add('active');
     window.scrollTo(0,0);
+  }
+
+  // ===== PUT YOUR WHATSAPP NUMBER HERE =====
+  // Country code + number, no +, spaces or dashes. Example (India): "919876543210"
+  const WHATSAPP_NUMBER = "YOURNUMBER";
+
+  function tellTukky() {
+    const when = document.getElementById('ticketWhen').textContent;
+    const msg = "I picked " + when + " 😄 (just for fun, we'll choose the real date together 💕)";
+    window.open("https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(msg), "_blank");
   }
 
   // ---- Yes / dodging No (same behavior as before) ----
