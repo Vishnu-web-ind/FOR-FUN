@@ -454,9 +454,9 @@
   /* rising hearts / sparkles in the background (made by JS) */
   .rise {
     position: absolute; bottom: -8%; pointer-events: none; opacity: 0;
-    animation: rise var(--rt, 11s) linear infinite; animation-delay: var(--rd, 0s);
+    animation: riseBg var(--rt, 11s) linear infinite; animation-delay: var(--rd, 0s);
   }
-  @keyframes rise {
+  @keyframes riseBg {
     0%   { transform: translate(0, 0) rotate(0deg) scale(0.7); opacity: 0; }
     12%  { opacity: var(--ro, 0.5); }
     50%  { transform: translate(var(--rx, 18px), -55vh) rotate(12deg) scale(1); }
